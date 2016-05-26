@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuration of the driver &mdash; Fanuc support in ROS-Industrial 0.4.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/override.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fanuc support in ROS-Industrial 0.4.0 documentation" href="index.html"/>
+        <link rel="next" title="Verification and Usage" href="verification.html"/>
+        <link rel="prev" title="Installation of the driver" href="installation.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Fanuc support in ROS-Industrial
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation of the driver</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration of the driver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#server-tags">Server Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flags-and-registers">Flags and Registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#maximum-concurrent-task-number">Maximum Concurrent Task Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#payload-tool-and-user-frames-optional">Payload, Tool and User Frames (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#karel-and-tpe-programs">KAREL and TPE Programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#karel-programs">KAREL Programs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tpe-programs">TPE Programs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#motion-speed-and-segment-termination">Motion Speed and Segment Termination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#complete-the-configuration">Complete the Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#next">Next</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="verification.html">Verification and Usage</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Troubleshooting</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notices.html">Notices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Fanuc support in ROS-Industrial</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+
+        <div class="header-override">
+          <p>
+            <a href="http://rosindustrial.org/news">ROS-Industrial news</a>
+          </p>
+          <a href="http://rosindustrial.org"><img src="_static/logo.png" /></a>
+        </div>
+
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Configuration of the driver</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/ros-industrial/fanuc/blob/indigo-devel/fanuc_docs/source/configuration.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuration-of-the-driver">
+<h1>Configuration of the driver<a class="headerlink" href="#configuration-of-the-driver" title="Permalink to this headline">¶</a></h1>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">This tutorial assumes familiarity with Fanuc controller cabinets, the Teach Pendant (iPendant) and the Roboguide environment. For more information on any of the steps in this tutorial, consult the documentation on these subjects provided by Fanuc Robotics.</p>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>In the <a class="reference internal" href="installation.html"><span class="doc">previous chapter</span></a> the ROS-Industrial driver components were installed on the robot controller. Now, before they can be started, some additional configuration of both the controller and the programs is required.</p>
+</div>
+<div class="section" id="server-tags">
+<h2>Server Tags<a class="headerlink" href="#server-tags" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">ros_state</span></code> and <code class="docutils literal"><span class="pre">ros_relay</span></code> programs make use of the <em>User Socket Messaging</em> (USM) software option, and expect two <em>Server Tags</em> to be available. By default ROS-Industrial uses 3 and 4, and they must be properly configured before use (1 and 2 are typically used by the built-in FTP server).</p>
+<p>To check Tag availability and status, open the <em>Host Comm</em> setup screen (<code class="docutils literal"><span class="pre">Menu</span> <span class="pre">→</span> <span class="pre">SETUP</span> <span class="pre">→</span> <span class="pre">Host</span> <span class="pre">Comm</span></code>), and then go to the <em>SETUP Servers</em> listing using <code class="docutils literal"><span class="pre">[SHOW]</span> <span class="pre">→</span> <span class="pre">Servers</span></code>. Pick two available Tags and write down their numbers (we&#8217;ll need those later, when updating the configuration of the ROS-Industrial programs). Finally, make sure the Tags are configured as follows (the comment is not required):</p>
+<div class="figure">
+<img alt="Server Tag configuration example" src="_images/tp_tag_config.png" />
+</div>
+<p>Go back to the <em>SETUP Servers</em> listing and verify that the chosen Tags are in state <code class="docutils literal"><span class="pre">STARTED</span></code>. If not, start each tag with <code class="docutils literal"><span class="pre">[ACTION]</span> <span class="pre">→</span> <span class="pre">DEFINE</span></code>, then <code class="docutils literal"><span class="pre">[ACTION]</span> <span class="pre">→</span> <span class="pre">START</span></code>, or restart the control cabinet. Make sure they have been started by re-opening the <em>SETUP Servers</em> screen (if necessary) and checking the <code class="docutils literal"><span class="pre">Current</span> <span class="pre">State</span></code> of both tags: it should say <code class="docutils literal"><span class="pre">STARTED</span></code>.</p>
+<div class="figure">
+<img alt="Server Tag state overview" src="_images/tp_4tags_started.png" />
+</div>
+<p>For more information on User Socket Messaging and tags, see Chapter 11 and Section 11.3.2 of the relevant Karel Reference Manual <a class="footnote-reference" href="#krl-refman" id="id1">[1]</a>.</p>
+</div>
+<div class="section" id="flags-and-registers">
+<span id="sec-flags-and-registers"></span><h2>Flags and Registers<a class="headerlink" href="#flags-and-registers" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">ros_relay</span></code> and <code class="docutils literal"><span class="pre">ros_movesm</span></code> programs make use of several registers and flags. By default, flags 1 &amp; 2, integer registers 1 &amp; 2 and position registers 1 &amp; 2 are used. Make sure these are not used by any other programs that may be running concurrently with the ROS-Industrial programs on the controller <a class="footnote-reference" href="#flagsregs" id="id2">[3]</a>. If any of the flags or registers are currently being used, find some alternatives, and note their numbers. We&#8217;ll use those in the next section.</p>
+<p>All flags and integer registers can be used, but the position registers need two registers at consecutive locations (ie: <code class="docutils literal"><span class="pre">PR[34]</span></code> <strong>and</strong> <code class="docutils literal"><span class="pre">PR[35]</span></code>).</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">It is good practice to set a descriptive comment on the used flags and registers. This will make it easier later in this tutorial to verify that the correct flags and registers are used in the ROS-Industrial programs.</p>
+</div>
+</div>
+<div class="section" id="maximum-concurrent-task-number">
+<h2>Maximum Concurrent Task Number<a class="headerlink" href="#maximum-concurrent-task-number" title="Permalink to this headline">¶</a></h2>
+<p>By default, the controller can only run a small number of concurrent user tasks, which could prevent the ROS-Industrial programs from starting. The currently configured number of allowed tasks is stored in the <code class="docutils literal"><span class="pre">$SCR.$MAXNUMTASK</span></code> system variable. Any number above 3 should be enough to start the KAREL programs, but higher may be necessary if the controller also starts other tasks.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Changing system variables can result in an unstable or non-functioning system. Before making any changes, be sure to have a recent backup of the controller and consult with the robot operator in case you are unsure about any of these steps.</p>
+</div>
+<p>The current value can be found in the <em>SYSTEM Variables</em> screen (<code class="docutils literal"><span class="pre">Menu</span> <span class="pre">→</span> <span class="pre">NEXT</span> <span class="pre">→</span> <span class="pre">SYSTEM</span> <span class="pre">→</span> <span class="pre">Variables</span></code>). Scroll down to <code class="docutils literal"><span class="pre">$SCR</span></code>, press <code class="docutils literal"><span class="pre">ENTER</span></code>, then scroll to the <code class="docutils literal"><span class="pre">$MAXNUMTASK</span></code> entry.</p>
+<p>To change the number, start the controller using a <em>controlled start</em>. Then open the <em>Program Limits</em> screen using <code class="docutils literal"><span class="pre">Menu</span> <span class="pre">→</span> <span class="pre">NEXT</span> <span class="pre">→</span> <span class="pre">PROGRAM</span> <span class="pre">SETUP</span></code>. Then input a new value for the <code class="docutils literal"><span class="pre">User</span> <span class="pre">Tasks</span></code> entry. Now restart the controller using <code class="docutils literal"><span class="pre">Fctn</span> <span class="pre">→</span> <span class="pre">START</span> <span class="pre">(COLD)</span></code>.</p>
+<p>Refer to Section B.1.3 of the relevant Fanuc Operator&#8217;s Manual for the tool package installed on the robot controller for more information on how to perform a <em>controlled start</em> <a class="footnote-reference" href="#opman" id="id3">[2]</a>.</p>
+</div>
+<div class="section" id="payload-tool-and-user-frames-optional">
+<h2>Payload, Tool and User Frames (optional)<a class="headerlink" href="#payload-tool-and-user-frames-optional" title="Permalink to this headline">¶</a></h2>
+<p>The following system settings may influence the behaviour of the robot when used with ROS-Industrial, however for basic operation, changes to these settings are not absolutely necessary.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Changes to payload schedules and / or selected user and tool frames may not be apparent to other users of the robot and can potentially influence all other programs on the controller. Be sure to have a recent backup and / or write down their current values in order to be able to restore them if necessary.</p>
+</div>
+<p>For the payload schedule, input the correct information using the TP on the <em>Motion/Payload Set</em> setup screen (<code class="docutils literal"><span class="pre">Menu</span> <span class="pre">→</span> <span class="pre">NEXT</span> <span class="pre">→</span> <span class="pre">SYSTEM</span> <span class="pre">→</span> <span class="pre">Motion</span></code>). Be sure to configure <em>and</em> select the correct schedule. For more information, see Section 9.14 in the the relevant Fanuc Operator&#8217;s Manual for the tool package installed on the robot controller <a class="footnote-reference" href="#opman" id="id4">[2]</a>.</p>
+<p>Configured user and tool frames are (currently) ignored in the ROS Industrial nodes as motion trajectories are specified in joint space. This is also true for robot state reporting. The use of a user frame coincident with the world frame is however recommended as it helps in debugging and verifying the motion of the arm and the location of the TCP using the <a class="reference external" href="http://wiki.ros.org/tf">tf</a> tools available in ROS.</p>
+<p>Tool frames configured at the robot controller side are also not taken into account by the ROS motion planners, as tools should be represented by an appropriate URDF. The combination of the arm and tool URDFs provides similar information to the planning libraries (see also the <a class="reference external" href="http://wiki.ros.org/Industrial/Tutorials/Create%20a%20URDF%20for%20an%20Industrial%20Robot">Create a URDF for an Industrial Robot</a> tutorial). It is however recommended to manually verify the correct tool frame setup on the TP, as the robot controller also uses this information.</p>
+<p>Go to <code class="docutils literal"><span class="pre">Menu</span> <span class="pre">→</span> <span class="pre">Setup</span> <span class="pre">→</span> <span class="pre">Frames</span></code> and use the <code class="docutils literal"><span class="pre">[OTHER]</span></code> function key to switch between the Tool and User Frame listings. Disable the user frame: use the <code class="docutils literal"><span class="pre">Next</span></code> button, then press the <code class="docutils literal"><span class="pre">CLRIND</span></code> function key (alternatively, configure an all zeros user frame) <a class="footnote-reference" href="#uframes" id="id5">[4]</a>. Verify the tool frame setup in the <em>Tool Frame</em> screen.</p>
+<p>For more information on user and tool frame setup, see Section 3.9 in the relevant Fanuc Operator&#8217;s Manual for the tool package installed on the robot controller <a class="footnote-reference" href="#opman" id="id6">[2]</a>.</p>
+</div>
+<div class="section" id="karel-and-tpe-programs">
+<h2>KAREL and TPE Programs<a class="headerlink" href="#karel-and-tpe-programs" title="Permalink to this headline">¶</a></h2>
+<p>With the information gathered in the previous sections, we can now proceed to configure the KAREL and TP programs on the controller. Even if you do not have to change any of the defaults, you still need to follow the steps in this section.</p>
+<div class="section" id="karel-programs">
+<h3>KAREL Programs<a class="headerlink" href="#karel-programs" title="Permalink to this headline">¶</a></h3>
+<p>The default configuration of the <code class="docutils literal"><span class="pre">ros_relay</span></code> program is shown in Table 1. Table 2 shows the default configuration of the <code class="docutils literal"><span class="pre">ros_state</span></code> program.</p>
+<p>Table 1: default configuration of <code class="docutils literal"><span class="pre">ros_relay</span></code>.</p>
+<p>Table 2: default configuration of <code class="docutils literal"><span class="pre">ros_state</span></code>.</p>
+<p>The data in these two tables will need to be entered into the configuration structures of the respective programs. If the above defaults cannot be used, update the relevant entries with the new values. If for instance Server Tag 3 is not available, use the index number of a Tag that can be used.</p>
+<div class="figure">
+<img alt="Showing Karel variables for a selected program" src="_images/tp_open_karel_vars.png" />
+</div>
+<p>To access the configuration structures, open the <em>Program Select</em> window by pressing the <code class="docutils literal"><span class="pre">Select</span></code> button on the TP, then <code class="docutils literal"><span class="pre">[TYPE]</span> <span class="pre">→</span> <span class="pre">KAREL</span> <span class="pre">Progs</span></code>. Now select <code class="docutils literal"><span class="pre">ros_state</span></code> (or <code class="docutils literal"><span class="pre">ros_relay</span></code>), and press <code class="docutils literal"><span class="pre">ENTER</span></code>. Press the <code class="docutils literal"><span class="pre">Data</span></code> button, then <code class="docutils literal"><span class="pre">[TYPE]</span> <span class="pre">→</span> <span class="pre">KAREL</span> <span class="pre">Vars</span></code>. You should now see the <code class="docutils literal"><span class="pre">cfg_</span></code> variable, press <code class="docutils literal"><span class="pre">ENTER</span></code>.</p>
+<p>If you selected <code class="docutils literal"><span class="pre">ros_state</span></code>, the next screen should show the contents of Table 2. To change the server tag used, navigate to the <code class="docutils literal"><span class="pre">s_tag_nr</span></code> entry, press <code class="docutils literal"><span class="pre">ENTER</span></code> and input the new value. Press <code class="docutils literal"><span class="pre">ENTER</span></code> again when finished. Do this for all the entries in the structure.</p>
+<p>Go back to <em>Program Select</em> and repeat this procedure for the <code class="docutils literal"><span class="pre">ros_relay</span></code> program (now use Table 1).</p>
+</div>
+<div class="section" id="tpe-programs">
+<h3>TPE Programs<a class="headerlink" href="#tpe-programs" title="Permalink to this headline">¶</a></h3>
+<p>Unfortunately, the TPE programs cannot use the configuration data of the KAREL programs, so they must be manually updated every time we change the used flags, integer or position registers. Fortunately, only the <code class="docutils literal"><span class="pre">ros_movesm</span></code> program needs to be updated.</p>
+<div class="figure">
+<img alt="ROS-Industrial TPE program 'movesm' being edited" src="_images/tp_edit_movesm_wide.png" />
+</div>
+<p>On the TP, open the <code class="docutils literal"><span class="pre">ros_movesm</span></code> program, and update all statements referencing the flags, integer or position registers with the new values. Make sure they correspond with the values you entered in the KAREL configuration in the previous section. If you&#8217;ve set comments on the registers and flags in the <a class="reference internal" href="#sec-flags-and-registers"><span class="std std-ref">Flags and Registers</span></a> section, the TP program should show these in the appropriate places.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Incorrect configuration of the flags, integer or position registers can result in damage to your robot, you and / or your workcell. Please make sure they are free to use, before continuing with the next steps. If you are unsure about register or flag usage by other programs, ask the operator of the robot to assist you.</p>
+</div>
+</div>
+<div class="section" id="motion-speed-and-segment-termination">
+<h3>Motion Speed and Segment Termination<a class="headerlink" href="#motion-speed-and-segment-termination" title="Permalink to this headline">¶</a></h3>
+<p>By default, the <code class="docutils literal"><span class="pre">ros_relay</span></code> program uses a CNT value of 50% and a fixed joint velocity of 20% for all motion commands (Table 1). Depending on the precision required during trajectory execution, these values can be changed. The relevant entries are <code class="docutils literal"><span class="pre">move_cnt</span></code> and <code class="docutils literal"><span class="pre">move_speed</span></code> in <code class="docutils literal"><span class="pre">ros_relay</span></code>, and can be changed using the procedure explained at the beginning of this section.</p>
+<p>For more information on the influence of these two values on trajectory execution, see the <a class="reference external" href="http://wiki.ros.org/Industrial/Tutorials/Improving_Motion_on_an_Industrial_Robot">Improving ROS-Industrial motion on an Industrial Robot</a> tutorial.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As all MoveIt motion plans are planned using the real velocity limits found in the URDF, the MoveIt <em>Trajectory Execution Manager</em> will frequently abort the execution (resulting in <code class="docutils literal"><span class="pre">Trajectory</span> <span class="pre">stop</span></code> messages on the <em>User Menu</em> on the TP). Execution monitoring can either be disabled, or the allowed time can be increased by setting the relevant parameters. See the <em>The Trajectory Execution Manager</em> section on the <a class="reference external" href="http://wiki.ros.org/fanuc/Troubleshooting/MoveIt%20Trajectory%20Execution%20Manager">Executing Trajectories with MoveIt!</a> page on the MoveIt wiki for more information.</p>
+</div>
+<p>The <a class="reference external" href="http://wiki.ros.org/fanuc_driver/Troubleshooting">Troubleshooting</a> subpage of <a class="reference external" href="http://wiki.ros.org/fanuc_driver">fanuc_driver</a> also has an entry on this: see <a class="reference external" href="http://wiki.ros.org/fanuc_driver/Troubleshooting#Robot_stops_at_seemingly_random_points_during_trajectory_execution">Robot stops at seemingly random points during trajectory execution</a>.</p>
+</div>
+<div class="section" id="complete-the-configuration">
+<h3>Complete the Configuration<a class="headerlink" href="#complete-the-configuration" title="Permalink to this headline">¶</a></h3>
+<p>As the last step, complete the configuration by setting the <code class="docutils literal"><span class="pre">checked</span></code> entry in each of the configuration structures to <code class="docutils literal"><span class="pre">TRUE</span></code>.</p>
+</div>
+</div>
+<div class="section" id="next">
+<h2>Next<a class="headerlink" href="#next" title="Permalink to this headline">¶</a></h2>
+<p>This concludes this tutorial. Continue to <a class="reference internal" href="verification.html"><span class="doc">Verification and Usage</span></a> to find out how to run the programs.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="krl-refman" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>The author used <em>FANUC Robotics SYSTEM, R-30iA Controller, KAREL Reference Manual</em> document <em>MARRC75KR07091E Rev C</em></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="opman" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id4">2</a>, <a class="fn-backref" href="#id6">3</a>)</em> The author used <em>FANUC Robot Series, R-30iA, Handling Tool, Operator&#8217;s Manual</em>, document <em>B-82594EN-2/02</em></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="flagsregs" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[3]</a></td><td>Note that the list of flags can be accessed via <code class="docutils literal"><span class="pre">Menu</span> <span class="pre">→</span> <span class="pre">I/O</span> <span class="pre">→</span> <span class="pre">NEXT</span> <span class="pre">→</span> <span class="pre">Flag</span></code>. The <code class="docutils literal"><span class="pre">F[]</span></code> array on the TP corresponds to the <code class="docutils literal"><span class="pre">FLG[]</span></code> array in the KAREL programs.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="uframes" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>Depending on the configuration and mounting of the arm, an &#8216;all-zeros&#8217; user frame may not be the best choice. In those situations, be sure to configure a more suitabe frame.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="verification.html" class="btn btn-neutral float-right" title="Verification and Usage" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral" title="Installation of the driver" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014-2016, TU Delft Robotics Institute.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.4.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

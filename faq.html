@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Troubleshooting &mdash; Fanuc support in ROS-Industrial 0.4.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/override.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fanuc support in ROS-Industrial 0.4.0 documentation" href="index.html"/>
+        <link rel="next" title="Notices" href="notices.html"/>
+        <link rel="prev" title="Verification and Usage" href="verification.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Fanuc support in ROS-Industrial
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation of the driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration of the driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verification.html">Verification and Usage</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controller">Controller</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#karel-programs-are-invisible-on-the-program-select-window">KAREL programs are invisible on the Program Select window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memo-159-convert-failed-in-prog">MEMO-159: Convert failed in PROG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tpif-013-other-program-is-running">TPIF-013: Other program is running</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#karel-driver">KAREL driver</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#host-144-comm-tag-error">HOST-144: Comm Tag error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-032-illegal-parameter">FILE-032: Illegal parameter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#intp-320-libssock-n-undefined-built-in">INTP-320: (LIBSSOCK, N) Undefined built-in</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jnt-pkt-srlise-err-errno">jnt_pkt_srlise err: ERRNO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exec-move-err-1">exec_move err: -1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ros">ROS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rviz-only-shows-collision-quality-models">RViz only shows &#8216;collision quality&#8217; models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interactive-marker-in-rviz-cannot-be-dragged-around">Interactive marker in RViz cannot be dragged around</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#robot-stops-at-seemingly-random-points-during-trajectory-execution">Robot stops at seemingly random points during trajectory execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#failed-to-load-byte-array">Failed to load byte array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unable-to-reconnect-to-the-robot">Unable to reconnect to the robot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notices.html">Notices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Fanuc support in ROS-Industrial</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+
+        <div class="header-override">
+          <p>
+            <a href="http://rosindustrial.org/news">ROS-Industrial news</a>
+          </p>
+          <a href="http://rosindustrial.org"><img src="_static/logo.png" /></a>
+        </div>
+
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Troubleshooting</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/ros-industrial/fanuc/blob/indigo-devel/fanuc_docs/source/faq.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This page lists some of the possible errors and issues encountered when using the <a class="reference external" href="http://wiki.ros.org/fanuc_driver">fanuc_driver</a> package. The <em>Remedy</em> subsections provide possible solutions.</p>
+<p>If you encounter an error not listed on this page or the provided remedy does not seem to work, please contact the developers using the <a class="reference external" href="https://groups.google.com/forum/?fromgroups#!forum/swri-ros-pkg-dev">ROS-Industrial</a> Google group (direct mail: <a class="reference external" href="mailto:swri-ros-pkg-dev&#37;&#52;&#48;googlegroups&#46;com">ROS-Industrial</a>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Make sure to check the <a class="reference external" href="http://wiki.ros.org/fanuc/indigo/known_issues">Known Issues</a> page before sending a message to the mailing list.</p>
+</div>
+</div>
+<div class="section" id="controller">
+<h2>Controller<a class="headerlink" href="#controller" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="karel-programs-are-invisible-on-the-program-select-window">
+<h3>KAREL programs are invisible on the Program Select window<a class="headerlink" href="#karel-programs-are-invisible-on-the-program-select-window" title="Permalink to this headline">¶</a></h3>
+<p>After copying the KAREL programs onto your controller, you do not see them on the <em>Program Select</em> window, nor can you change the displayed program <code class="docutils literal"><span class="pre">TYPE</span></code> to <code class="docutils literal"><span class="pre">KAREL</span> <span class="pre">Progs</span></code>.</p>
+<p><strong>Cause</strong>: Listing and accessing KAREL programs is not enabled on the controller.</p>
+<p><strong>Remedy</strong>: Enable the listing of KAREL programs by setting the <code class="docutils literal"><span class="pre">$KAREL_ENB</span></code> system variable to <code class="docutils literal"><span class="pre">1</span></code>. Open the <em>SYSTEM Variables</em> screen (<code class="docutils literal"><span class="pre">Menu</span> <span class="pre">→</span> <span class="pre">NEXT</span> <span class="pre">→</span> <span class="pre">SYSTEM</span> <span class="pre">→</span> <span class="pre">Variables</span></code>), and scroll down to <code class="docutils literal"><span class="pre">$KAREL_ENB</span></code>. Press <code class="docutils literal"><span class="pre">ENTER</span></code>, and change the value to <code class="docutils literal"><span class="pre">1</span></code>. The modification is immediate, you do not need to restart the controller.</p>
+</div>
+<div class="section" id="memo-159-convert-failed-in-prog">
+<h3>MEMO-159: Convert failed in PROG<a class="headerlink" href="#memo-159-convert-failed-in-prog" title="Permalink to this headline">¶</a></h3>
+<p>While trying to copy a new or updated version of any of the ROS-Industrial KAREL programs, the TP shows the following error:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Duplicate creation TYPE mismatch
+MEMO-159 Convert failed in PROG
+VARS-014 Create type - KL_TYPE failed
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">PROG</span></code> is any KAREL program, and <code class="docutils literal"><span class="pre">KL_TYPE</span></code> is a KAREL type used in <code class="docutils literal"><span class="pre">PROG</span></code>.</p>
+<p><strong>Cause</strong>: The type or structure of a variable used in <code class="docutils literal"><span class="pre">PROG</span></code> has changed in the updated version, and the KAREL runtime system cannot convert the variable to the new type. This error can occur even after removing <code class="docutils literal"><span class="pre">PROG.PC</span></code> file from the controller, as the related <code class="docutils literal"><span class="pre">.vr</span></code> file (or <em>variable record</em>, the file that stores information on variables) is not automatically deleted upon deleting the p-code file.</p>
+<p><strong>Remedy</strong>: Remove the <code class="docutils literal"><span class="pre">PROG.VR</span></code> file from the controller. This can be done from the <em>Program Select</em> window, as well as by using the <code class="docutils literal"><span class="pre">Menu</span> <span class="pre">→</span> <span class="pre">FILE</span></code> menu (switch to the <code class="docutils literal"><span class="pre">MD:</span></code> device). If the copy attempt left a <code class="docutils literal"><span class="pre">PROG.PC</span></code> file, remove it as well. The copy operation should now succeed.</p>
+<p>In some cases, other (ROS-Industrial) KAREL programs or libraries have references to the old type as well and these will have to be removed too. Always first delete the <code class="docutils literal"><span class="pre">.PC</span></code> file, then the <code class="docutils literal"><span class="pre">.VR</span></code>.</p>
+<p><strong>Note</strong>: Removing the <code class="docutils literal"><span class="pre">.VR</span></code> file will result in loss of the values of the variables stored in the <code class="docutils literal"><span class="pre">.VR</span></code>. Backup important data before deleting the files. The <code class="docutils literal"><span class="pre">PROG.VA</span></code> file should provide you with an ASCII rendering of the <code class="docutils literal"><span class="pre">.VR</span></code> file.</p>
+</div>
+<div class="section" id="tpif-013-other-program-is-running">
+<h3>TPIF-013: Other program is running<a class="headerlink" href="#tpif-013-other-program-is-running" title="Permalink to this headline">¶</a></h3>
+<p>Upon trying to (re)start the <code class="docutils literal"><span class="pre">ros</span></code> TP program, the TP shows the following error:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>TPIF-013 Other program is running
+</pre></div>
+</div>
+<p><strong>Cause</strong>: This is caused by another TPE or KAREL user program that is still running on the controller. You cannot start new user programs while others are still running.</p>
+<p><strong>Remedy</strong>: Make sure no other user programs are running or paused on the controller before trying to start the ROS programs. <code class="docutils literal"><span class="pre">Fctn</span> <span class="pre">→</span> <span class="pre">ABORT</span> <span class="pre">ALL</span></code> can be used to abort any running programs.</p>
+<p><strong>Note</strong>: You may need to use <code class="docutils literal"><span class="pre">ABORT</span> <span class="pre">ALL</span></code> twice for programs that have network sockets that are in the <code class="docutils literal"><span class="pre">ACCEPT</span></code> state. For the <code class="docutils literal"><span class="pre">ros_relay</span></code> and <code class="docutils literal"><span class="pre">ros_state</span></code> programs, this is when the TP shows the following on the User Menu:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>12345 I RSTA Waiting for ROS state prox
+12345 I RREL Waiting for ROS traj relay
+</pre></div>
+</div>
+<p>and the ROS PC is not connected to the controller. Select <code class="docutils literal"><span class="pre">Fctn</span> <span class="pre">→</span> <span class="pre">ABORT</span> <span class="pre">ALL</span></code> twice, then try again.</p>
+</div>
+</div>
+<div class="section" id="karel-driver">
+<h2>KAREL driver<a class="headerlink" href="#karel-driver" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="host-144-comm-tag-error">
+<h3>HOST-144: Comm Tag error<a class="headerlink" href="#host-144-comm-tag-error" title="Permalink to this headline">¶</a></h3>
+<p>The TP shows the following on the User Menu:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>12345 E PROG cfg err, TAG idx: N
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">PROG</span></code> is any of <code class="docutils literal"><span class="pre">RSTA</span></code> or <code class="docutils literal"><span class="pre">RREL</span></code>, and <code class="docutils literal"><span class="pre">N</span></code> is a Server Tag index number.</p>
+<p><strong>Cause</strong>: the configured Server Tag does either not exist, is not correctly configured, or is not in the correct state.</p>
+<p><strong>Remedy</strong>: make sure you have configured the Tag correctly, and that the configuration of the respective ROS-Industrial program uses the correct tag number. Refer to the <a class="reference external" href="http://wiki.ros.org/fanuc/Tutorials/hydro/Configuration#Server_Tags">Server Tags</a> section of the installation tutorial for information on Tag setup.</p>
+</div>
+<div class="section" id="file-032-illegal-parameter">
+<h3>FILE-032: Illegal parameter<a class="headerlink" href="#file-032-illegal-parameter" title="Permalink to this headline">¶</a></h3>
+<p>The TP shows the following on the User Menu:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>12345 E PROG cfg error: -1
+12346 E PROG check cfg
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">PROG</span></code> is any of <code class="docutils literal"><span class="pre">RSTA</span></code> or <code class="docutils literal"><span class="pre">RREL</span></code>.</p>
+<p><strong>Cause:</strong> the configuration of the respective program is either uninitialised, or has not been completed.</p>
+<p><strong>Remedy:</strong> make sure the configuration of all ROS-Industrial programs has been completed, and that the <code class="docutils literal"><span class="pre">checked</span></code> entry is set to <code class="docutils literal"><span class="pre">TRUE</span></code>. Refer to the <a class="reference external" href="http://wiki.ros.org/fanuc/Tutorials/hydro/Configuration#KAREL_Programs">KAREL Programs</a> section of the installation tutorial for information on the setup of the KAREL and TPE programs.</p>
+</div>
+<div class="section" id="intp-320-libssock-n-undefined-built-in">
+<h3>INTP-320: (LIBSSOCK, N) Undefined built-in<a class="headerlink" href="#intp-320-libssock-n-undefined-built-in" title="Permalink to this headline">¶</a></h3>
+<p>Nothing is shown on the User Menu, and all ROS-Industrial programs (<code class="docutils literal"><span class="pre">ros_state</span></code>, <code class="docutils literal"><span class="pre">ros_relay</span></code>) have been aborted.</p>
+<p><strong>Cause</strong>: this is most likely caused by attempting to start the programs on a controller that does not have all required options installed. For <code class="docutils literal"><span class="pre">libssock</span></code>, this is most likely option R648 (<em>User Socket Messaging</em>) (resulting in the missing <code class="docutils literal"><span class="pre">MSG_*</span></code> built-ins).</p>
+<p><strong>Remedy</strong>: make sure the controller has all required options installed (and activated). Refer to the <a class="reference external" href="http://wiki.ros.org/fanuc/Tutorials/hydro/Installation#Prerequisites">Prerequisites</a> section of the installation tutorial for information on which options are required.</p>
+<p>If the controller has the required options installed, please report the issue to the mailinglist and / or the <a class="reference external" href="https://github.com/ros-industrial/fanuc/issues">ros-industrial/fanuc</a> repository. Do not forget to include any relevant information (ROS release, version of <a class="reference external" href="http://wiki.ros.org/fanuc_driver">fanuc_driver</a>, controller type and software and used manipulator).</p>
+</div>
+<div class="section" id="jnt-pkt-srlise-err-errno">
+<h3>jnt_pkt_srlise err: ERRNO<a class="headerlink" href="#jnt-pkt-srlise-err-errno" title="Permalink to this headline">¶</a></h3>
+<p>The TP shows the following on the User Menu:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>12345 E PROG jnt_pkt_srlise err: ERRNO
+12345 I PROG Waiting for ROS ..
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">PROG</span></code> is any of <code class="docutils literal"><span class="pre">RSTA</span></code> or <code class="docutils literal"><span class="pre">RREL</span></code>, and <code class="docutils literal"><span class="pre">ERRNO</span></code> is a negative error number (possible values: <code class="docutils literal"><span class="pre">-67213</span></code>).</p>
+<p><strong>Cause</strong>: The ROS client disconnected the TCP socket connection at the moment the KAREL program tried to write to or read from it.</p>
+<p><strong>Remedy</strong>: This is not an error. The state proxy and trajectory relay will handle the disconnect and wait for a new connection.</p>
+</div>
+<div class="section" id="exec-move-err-1">
+<h3>exec_move err: -1<a class="headerlink" href="#exec-move-err-1" title="Permalink to this headline">¶</a></h3>
+<p>The TP shows the following on the User Menu:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>12345 E RREL exec_move err: -1
+12345 I RREL Waiting for ROS ..
+</pre></div>
+</div>
+<p>The ROS console shows:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>[ERROR] [1234567890.123456789]: Socket sendBytes failed, rc: -1. Error: &#39;Broken pipe&#39; (errno: 32)
+[ERROR] [1234567890.123456789]: Failed to connect to server, rc: -1. Error: &#39;Transport endpoint is already connected&#39; (errno: 106)
+
+(the same error repeated)
+
+[ERROR] [1234567890.123456789]: Failed to connect to server, rc: -1. Error: &#39;Transport endpoint is already connected&#39; (errno: 106)
+[ERROR] [1234567890.123456789]: Timeout connecting to robot controller.  Send new motion command to retry.
+</pre></div>
+</div>
+<p>Sending a new motion command does not always work.</p>
+<p><strong>Cause</strong>: The ROS client asked the trajectory relay to move to a point in the current trajectory that the robot is unable to reach (violation of joint limits). The relay aborts execution of the trajectory and disconnects the ROS client in that case.</p>
+<p><strong>Remedy</strong>: Verify that the joint limits configured on the Fanuc controller correspond to those in the used urdf (in the support package). The MoveIt motion planners depend on these limits to generate valid trajectories. Update the limits in the xacro macro if there are any differences. Be sure to regenerate the urdf and any MoveIt packages that depend on the it.</p>
+<p><strong>Note</strong>: In some cases it may be necessary to restart the <code class="docutils literal"><span class="pre">ros</span></code> TPE program on the controller.</p>
+</div>
+</div>
+<div class="section" id="ros">
+<h2>ROS<a class="headerlink" href="#ros" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rviz-only-shows-collision-quality-models">
+<h3>RViz only shows &#8216;collision quality&#8217; models<a class="headerlink" href="#rviz-only-shows-collision-quality-models" title="Permalink to this headline">¶</a></h3>
+<p>After starting RViz (either by using the <code class="docutils literal"><span class="pre">test_...launch</span></code> files in the support packages, or when running any of the MoveIt <code class="docutils literal"><span class="pre">planning_execution</span></code> launch files), the visualisation only shows collision detail models, even when <em>Visual Enabled</em> is selected.</p>
+<p><strong>Cause:</strong> the support packages only include the collision quality models, as we do not currently have permission to distribute the detailed CAD models.</p>
+<p><strong>Remedy:</strong> none. A possible work-around would involve re-exporting the support package meshes from SolidWorks or any other suitable program. A complicating factor is that correct display of the model depends on proper origins of the meshes, which are not necessarily identical to those of the original models. Additionally, users would need access to the original models.</p>
+</div>
+<div class="section" id="interactive-marker-in-rviz-cannot-be-dragged-around">
+<h3>Interactive marker in RViz cannot be dragged around<a class="headerlink" href="#interactive-marker-in-rviz-cannot-be-dragged-around" title="Permalink to this headline">¶</a></h3>
+<p>After starting <code class="docutils literal"><span class="pre">demo.launch</span></code> or <code class="docutils literal"><span class="pre">moveit_planning_execution.launch</span></code> from any of the Fanuc MoveIt configurations, the 6D interactive marker cannot be dragged from the starting position, and the terminal window shows the following error:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>[ERROR] [1234567890.123456789]: Exception caught while handling end-effector update: ikfast exception: /path/to/ikfast/plugin/solver.cpp:LINE_NR: polyroots8: Assertion &#39;rawcoeffs[0] != 0&#39; failed
+</pre></div>
+</div>
+<p><strong>Cause:</strong> the manipulator is most likely a singular configuration, for which the IK plugin cannot find any valid solutions. <code class="docutils literal"><span class="pre">demo.launch</span></code> (and <code class="docutils literal"><span class="pre">moveit_planning_execution.launch</span></code> without the <code class="docutils literal"><span class="pre">sim:=false</span></code> argument) does not use real joint state data, but a simple joint space interpolator, for which the initial state puts all joints at their &#8216;zero position&#8217;. For some models this is a singular configuration.</p>
+<p><strong>Remedy:</strong> if possible, use a different initial state, command the manipulator to move away (in joint space) from the singular configuration, or (if in simulation) use the <em>random valid</em> option for the <em>Goal State</em> and click <em>Plan and Execute</em> button. As soon as the manipulator is out of the singular configuration, dragging the interactive marker should start working again.</p>
+</div>
+<div class="section" id="robot-stops-at-seemingly-random-points-during-trajectory-execution">
+<h3>Robot stops at seemingly random points during trajectory execution<a class="headerlink" href="#robot-stops-at-seemingly-random-points-during-trajectory-execution" title="Permalink to this headline">¶</a></h3>
+<p>The TP shows the following on the User Menu:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>12345 I RREL Trajectory stop
+</pre></div>
+</div>
+<p>The ROS console shows:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>[ERROR] [1234567890.123456789]: Controller is taking too long to execute trajectory (the expected upper bound for the trajectory execution was X.Y seconds). Stopping trajectory.
+[ INFO] [1234567890.123456789]: MoveitSimpleControllerManager: Cancelling execution for
+[ INFO] [1234567890.123456789]: Execution completed: TIMED_OUT
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">X.Y</span></code> is some duration in seconds.</p>
+<p><strong>Cause:</strong> the MoveIt <em>Trajectory Execution Manager</em> detects a trajectory execution overrun, and aborts execution of the trajectory. This is often due to the physical robot not being able to attain the speeds specified in the trajectory. The Fanuc KAREL trajectory relay overrides specified motion speed, resulting in the quoted error message.</p>
+<p><strong>Remedy:</strong> increase the MoveIt duration scaling parameter, or disable duration monitoring completely. See the <em>The Trajectory Execution Manager</em> section on the <a class="reference external" href="http://wiki.ros.org/fanuc/Troubleshooting/MoveIt%20Trajectory%20Execution%20Manager">Executing Trajectories with MoveIt!</a> page on the MoveIt wiki or <a class="reference external" href="http://answers.ros.org/question/196586/how-do-i-disable-execution_duration_monitoring/">How do I disable execution_duration_monitoring ?</a> on ROS Answers for more information.</p>
+</div>
+<div class="section" id="failed-to-load-byte-array">
+<h3>Failed to load byte array<a class="headerlink" href="#failed-to-load-byte-array" title="Permalink to this headline">¶</a></h3>
+<p>The TP shows the following on the User Menu:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>12345 I RSTA Connected
+12345 I RREL Connected
+</pre></div>
+</div>
+<p>The ROS console shows:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>[ERROR] [1234567890.123456789]: Set buffer size: 1060, larger than MAX:, 1024
+[ERROR] [1234567890.123456789]: Failed to load byte array
+</pre></div>
+</div>
+<p><strong>Cause:</strong> one possible cause is a difference in endianness between the robot and the PC running ROS. The Fanuc stack includes preconfigured launch files taking the endianness of the specific robot controller into account. If the actual controller uses a different endianness, the communication will not work properly.</p>
+<p><strong>Remedy:</strong> try to provide the launchfile with a different value for the <code class="docutils literal"><span class="pre">use_bswap</span></code> argument. For most controllers, this is set to <code class="docutils literal"><span class="pre">true</span></code>. If appending <code class="docutils literal"><span class="pre">use_bswap:=false</span></code> solves the problem, please report the issue to the mailinglist and / or the <a class="reference external" href="https://github.com/ros-industrial/fanuc/issues">ros-industrial/fanuc</a> repository. Do not forget to include any relevant information (ROS release, version of <a class="reference external" href="http://wiki.ros.org/fanuc_driver">fanuc_driver</a>, controller type and software and used manipulator).</p>
+</div>
+<div class="section" id="unable-to-reconnect-to-the-robot">
+<h3>Unable to reconnect to the robot<a class="headerlink" href="#unable-to-reconnect-to-the-robot" title="Permalink to this headline">¶</a></h3>
+<p>The TP shows the following on the User Menu:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>12345 I RSTA Waiting for ROS state prox
+12345 I RREL Waiting for ROS traj relay
+12345 I RSTA Connected
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>12345 I RREL Connected
+</pre></div>
+</div>
+<p>The ROS console shows:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>[ERROR] [1234567890.123456789]: Failed to connect to server, rc: -1. Error: &#39;Connection timed out&#39; (errno: 110)
+[..]
+[ERROR] [1234567890.123456789]: Timeout connecting to robot controller.  Send new motion command to retry.
+</pre></div>
+</div>
+<p><strong>Cause:</strong> this error can be caused by an incomplete and / or unexpected shutdown of the ROS-Industrial nodes on the PC, leaving the ROS-Industrial programs on the controller in an inconsistent state. In such a case, the socket on the controller is still waiting for a timeout to occur and blocks any new connection attempt in the meantime.</p>
+<p><strong>Remedy:</strong> either wait for the timeout on the controller to occur, or forcibly stop the ROS-Industrial programs on the controller using <code class="docutils literal"><span class="pre">Fctn</span> <span class="pre">→</span> <span class="pre">ABORT</span> <span class="pre">(ALL)</span></code>. Now restart the programs on the controller, then restart the ROS nodes on the PC.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="notices.html" class="btn btn-neutral float-right" title="Notices" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="verification.html" class="btn btn-neutral" title="Verification and Usage" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014-2016, TU Delft Robotics Institute.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.4.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

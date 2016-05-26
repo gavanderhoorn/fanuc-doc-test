@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation of the driver &mdash; Fanuc support in ROS-Industrial 0.4.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/override.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Fanuc support in ROS-Industrial 0.4.0 documentation" href="index.html"/>
+        <link rel="next" title="Configuration of the driver" href="configuration.html"/>
+        <link rel="prev" title="Introduction" href="introduction.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Fanuc support in ROS-Industrial
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation of the driver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-options">Installation options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#source-install">Source Install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-workcell">Creating a Workcell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#importing">Importing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building">Building</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#binary-install">Binary Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#copying-the-binaries">Copying the Binaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next">Next</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration of the driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verification.html">Verification and Usage</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Troubleshooting</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notices.html">Notices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Fanuc support in ROS-Industrial</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+
+        <div class="header-override">
+          <p>
+            <a href="http://rosindustrial.org/news">ROS-Industrial news</a>
+          </p>
+          <a href="http://rosindustrial.org"><img src="_static/logo.png" /></a>
+        </div>
+
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Installation of the driver</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/ros-industrial/fanuc/blob/indigo-devel/fanuc_docs/source/installation.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation-of-the-driver">
+<h1>Installation of the driver<a class="headerlink" href="#installation-of-the-driver" title="Permalink to this headline">¶</a></h1>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">This tutorial assumes familiarity with Fanuc controller cabinets, the Teach Pendant (iPendant) and the Roboguide environment. For more information on any of the steps in this tutorial, consult the documentation on these subjects provided by Fanuc Robotics.</p>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial guides you through all the steps necessary to install the ROS-Industrial driver programs onto a Fanuc Robotics controller. After installation, the programs and controller will need to be configured, which will be described in <a class="reference internal" href="configuration.html"><span class="doc">Configuration of the driver</span></a>.</p>
+<p>All of the steps outlined in this tutorial can be used for setting up a real controller as well as a simulated one in Roboguide. For a source install, the only difference is in the <a class="reference internal" href="#sec-copying-the-binaries"><span class="std std-ref">Copying the Binaries</span></a> step: Roboguide automatically loads the binaries onto the virtual robot controller as part of the build process, so no additional action is needed. For a binary install, the copy destination is the virtual controller instead of the real one.</p>
+<p>Note that these tutorials only cover the installation and setup of those programs of the <a class="reference external" href="http://wiki.ros.org/fanuc_driver">fanuc_driver</a> package that are supposed to run on the controller. For help on installing ROS-Industrial in general, please see the ROS-Industrial <a class="reference external" href="http://wiki.ros.org/Industrial/Install">installation</a> pages.</p>
+<p>Finally: this tutorial assumes the use of an <em>iPendant</em>. For users with older (legacy) pendants, this may mean that key sequences given in the text, screenshots and menus will not match completely. Due to the lower resolution of legacy pendants, many key sequences need either an additional <code class="docutils literal"><span class="pre">NEXT</span></code> inserted, or (sub)menus should be opened using <code class="docutils literal"><span class="pre">TYPE</span></code>.</p>
+</div>
+<div class="section" id="installation-options">
+<h2>Installation options<a class="headerlink" href="#installation-options" title="Permalink to this headline">¶</a></h2>
+<p>There are two options for installation: from source or using a set of precompiled binaries. In general, a binary install is recommended, as it is much faster and less involved (note: there are currently no KAREL binaries available for the Indigo version of the driver, thus a source install is always necessary for that version). After choosing a compatible version, only a small number of files have to be copied to the controller.</p>
+<p>If it is not possible to use the provided binaries, a source install is the only option. This may be the case if the target controller runs an incompatible version of the KAREL runtime, if it cannot support access to <em>KAREL Vars</em> or if there is a requirement to use customised driver code. A source install is more complicated, as it necessitates the creation of a Roboguide workcell, and the compilation of several source files.</p>
+<p>The same configuration procedure is used for both installation types.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>For a binary install, the following is needed:</p>
+<blockquote>
+<div><ul class="simple">
+<li>a compatible binary distribution of the KAREL and TP binaries <a class="footnote-reference" href="#id5" id="id1">[1]</a></li>
+<li>a method of transferring the necessary files to the controller (USB stick, a network connection)</li>
+</ul>
+</div></blockquote>
+<p>For a source installation, requirements are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>a copy of the <a class="reference external" href="http://wiki.ros.org/fanuc_driver">fanuc_driver</a> package, version 0.2 or newer</li>
+<li>an installation of Fanuc Roboguide <a class="footnote-reference" href="#id6" id="id2">[2]</a></li>
+<li>a Windows PC or VM (as Roboguide does not run on Linux)</li>
+<li>a method of transferring the necessary files to the controller (USB stick, a network connection)</li>
+</ul>
+</div></blockquote>
+<p>In all cases, the following software options should be present on your robot in addition to basic networking and TCP/IP support:</p>
+<blockquote>
+<div><ul class="simple">
+<li>R632 - KAREL</li>
+<li>R648 - User Socket Messaging</li>
+</ul>
+</div></blockquote>
+<p>Information on the installed software options can be found by consulting the documentation that came with your robot. Alternatively, the <em>Version ID</em> submenu of the <em>STATUS</em> screen can be used. On the TP: <code class="docutils literal"><span class="pre">Menu</span> <span class="pre">→</span> <span class="pre">NEXT</span> <span class="pre">→</span> <span class="pre">STATUS</span> <span class="pre">→</span> <span class="pre">Version</span> <span class="pre">ID</span></code>, then <code class="docutils literal"><span class="pre">CONFIG</span></code> (or <code class="docutils literal"><span class="pre">F3</span></code>). The same information is available on the <em>Summary Configuration/Status</em> webpage, which should be accessible if your controller has the web server option installed.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Make sure your controller has a correctly configured and working network setup. Verify you can <em>ping</em> the controller from your ROS pc. Refer to the relevant documentation for instructions on how to configure networking on a Fanuc industrial robot controller.</p>
+</div>
+<p>If you&#8217;ve chosen to perform an installation using the precompiled binaries, please proceed to the <a class="reference internal" href="#sec-binary-install"><span class="std std-ref">Binary Install</span></a> section. For an installation from source, continue with the next section.</p>
+</div>
+<div class="section" id="source-install">
+<h2>Source Install<a class="headerlink" href="#source-install" title="Permalink to this headline">¶</a></h2>
+<p>Before the ROS-Industrial programs can be transferred to the robot controller, they need to be compiled into binaries. We&#8217;ll use Fanuc Roboguide for this.</p>
+<div class="section" id="creating-a-workcell">
+<h3>Creating a Workcell<a class="headerlink" href="#creating-a-workcell" title="Permalink to this headline">¶</a></h3>
+<p>First, create a new workcell in Roboguide, either by using the wizard or by creating a copy from your actual robot controller. When using the wizard, be sure to select the correct <em>Application</em> package, as well as the correct robot type. On the software options screen, also make sure to select at least options <em>R632 - KAREL</em> and <em>R648 - User Socket Messaging</em>.</p>
+<div class="align-centered figure align-center">
+<a class="reference internal image-reference" href="_images/rg_cellwiz_karel_usm.png"><img alt="New workcell wizard: KAREL and USM options" src="_images/rg_cellwiz_karel_usm.png" style="width: 100%;" /></a>
+</div>
+<p>After completing the wizard, you should end up with an empty workcell with just your robot in the middle of it. If you chose to create a copy of the controller, the <em>Cell Browser</em> might show programs and files that were already present on the robot under the <em>Programs</em> and <em>Files</em> sections. As long as they do not conflict with the ROS-Industrial KAREL programs, they can be ignored.</p>
+</div>
+<div class="section" id="importing">
+<span id="sec-importing"></span><h3>Importing<a class="headerlink" href="#importing" title="Permalink to this headline">¶</a></h3>
+<div class="align-right figure">
+<img alt="ROS-Industrial Karel and TPE programs in the Files section of the Cell Browser" src="_images/rg_file_list.png" />
+</div>
+<p><div class="clearer"></div></p>
+<p>In the <em>Cell Browser</em>, import the KAREL and TPE sources into the workcell using the <code class="docutils literal"><span class="pre">Project</span> <span class="pre">→</span> <span class="pre">Add</span> <span class="pre">Files</span></code> menu option. Browse to your local <a class="reference external" href="http://wiki.ros.org/fanuc_driver">fanuc_driver</a> package and select all <code class="docutils literal"><span class="pre">*.kl</span></code> files in the <code class="docutils literal"><span class="pre">karel</span></code> sub directory not ending in <code class="docutils literal"><span class="pre">_h.kl</span></code> or <code class="docutils literal"><span class="pre">_t.kl</span></code>.</p>
+<p>For <a class="reference external" href="http://wiki.ros.org/fanuc_driver">fanuc_driver</a> version 0.3.0 and up, just select all <code class="docutils literal"><span class="pre">.kl</span></code> files in the <code class="docutils literal"><span class="pre">karel</span></code> sub directory.</p>
+<p>Click the <code class="docutils literal"><span class="pre">Open</span></code> button to add them to the <em>Cell Browser</em>.</p>
+<p>Now add the <code class="docutils literal"><span class="pre">*.ls</span></code> files in the <code class="docutils literal"><span class="pre">tpe</span></code> sub directory as well. The <em>Files</em> section in the <em>Cell Browser</em> should contain at least the files shown.</p>
+</div>
+<div class="section" id="building">
+<span id="sec-building"></span><h3>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h3>
+<div class="align-right figure">
+<img alt="ROS-Industrial Karel and TPE programs in the Programs section of the Cell Browser" src="_images/rg_program_list.png" />
+</div>
+<p><div class="clearer"></div></p>
+<p>Now build all files by selecting <code class="docutils literal"><span class="pre">Project</span> <span class="pre">→</span> <span class="pre">Build</span> <span class="pre">→</span> <span class="pre">All</span></code> in Roboguide (if you have other source files under <em>Files</em>, build only those shown in the <a class="reference internal" href="#sec-importing"><span class="std std-ref">Importing</span></a> section). No errors or warnings should be reported, and the <em>Programs</em> section in the <em>Cell Browser</em> should show the compiled binaries (<code class="docutils literal"><span class="pre">TPREC</span></code> is a default program and is not a part of ROS-Industrial).</p>
+<p>Now continue with <a class="reference internal" href="#sec-copying-the-binaries"><span class="std std-ref">Copying the Binaries</span></a>.</p>
+<div style="clear: both"/></div>
+</div>
+<div class="section" id="binary-install">
+<span id="sec-binary-install"></span><h2>Binary Install<a class="headerlink" href="#binary-install" title="Permalink to this headline">¶</a></h2>
+<p>A Roboguide workcell is not needed for a binary install: all that is required is a copy of the necessary binaries. They should be compatible with the software installed on the target controller, as well as with the installed version of <a class="reference external" href="http://wiki.ros.org/fanuc_driver">fanuc_driver</a> (so version 0.2.0 of <a class="reference external" href="http://wiki.ros.org/fanuc_driver">fanuc_driver</a> must be used with version 0.2.0 of the precompiled binaries).</p>
+<p>From the <a class="reference external" href="http://wiki.ros.org/fanuc_driver/hydro#Binaries">Binaries</a> section on the <a class="reference external" href="http://wiki.ros.org/fanuc_driver">fanuc_driver</a> page, download the correct version and extract it in some temporary location. You should end up with a directory containing several <code class="docutils literal"><span class="pre">.pc</span></code> and <code class="docutils literal"><span class="pre">.tp</span></code> files. Make sure the names correspond to those listed in the <a class="reference internal" href="#sec-building"><span class="std std-ref">Building</span></a> section.</p>
+<p>We can now continue to copy the extracted files to the target controller.</p>
+</div>
+<div class="section" id="copying-the-binaries">
+<span id="sec-copying-the-binaries"></span><h2>Copying the Binaries<a class="headerlink" href="#copying-the-binaries" title="Permalink to this headline">¶</a></h2>
+<p>Finally, the binaries need to be transferred to the controller. This can be done by direct transfer over a network connection (FTP) or by using a mass storage device (such as a USB stick or PCMCIA memory card). Refer to the relevant Fanuc Operator&#8217;s Manual for the tool package installed on the robot controller for information on how to copy files using removable media <a class="footnote-reference" href="#id7" id="id3">[3]</a>. Refer to the Roboguide help files for information on how to perform network transfers of files to robots <a class="footnote-reference" href="#id8" id="id4">[4]</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Updating older versions of the ROS-Industrial KAREL programs may result in a <code class="docutils literal"><span class="pre">MEMO-159</span></code> or <code class="docutils literal"><span class="pre">VARS-014</span></code> error. See <a class="reference external" href="http://wiki.ros.org/fanuc_driver/Troubleshooting#MEMO-159:_Convert_failed_in_PROG">MEMO-159: Convert failed in PROG</a> in that case. TP programs are always overwritable, provided none of them are loaded as the <em>current</em> program (ie: loaded through the <em>Program Select</em> window).</p>
+</div>
+<p>After copying the binaries onto the robot controller, open the <em>Program Select</em> window by pressing the <code class="docutils literal"><span class="pre">Select</span></code> button on the TP, then <code class="docutils literal"><span class="pre">[TYPE]</span> <span class="pre">→</span> <span class="pre">KAREL</span> <span class="pre">Progs</span></code>.</p>
+<p>If the KAREL programs do not show up on the TP, or you cannot change the display <code class="docutils literal"><span class="pre">TYPE</span></code> to <code class="docutils literal"><span class="pre">KAREL</span> <span class="pre">Progs</span></code>, make sure the KAREL support has been properly setup on your controller. See <a class="reference external" href="http://wiki.ros.org/fanuc_driver/Troubleshooting#KAREL_programs_are_invisible_on_the_Program_Select_window">KAREL programs are invisible on the Program Select window</a> on the <a class="reference external" href="http://wiki.ros.org/fanuc_driver/Troubleshooting">Troubleshooting</a> page.</p>
+<p>Make sure the following programs are listed (note that the revision numbers may be different):</p>
+<div class="figure">
+<img alt="ROS-Industrial Karel programs on the controller after installation" src="_images/tp_select_karel_progs.png" />
+</div>
+<p>Also check to make sure the necessary TPE programs are present by pressing <code class="docutils literal"><span class="pre">[TYPE]</span> <span class="pre">→</span> <span class="pre">TP</span> <span class="pre">Programs</span></code>. You should see the following programs (the <code class="docutils literal"><span class="pre">-BCKEDT-</span></code> program is not part of ROS-Industrial):</p>
+<div class="figure">
+<img alt="ROS-Industrial TPE programs on the controller after installation" src="_images/tp_select_tp_progs.png" />
+</div>
+<p>The ROS-Industrial programs are now installed on the controller.</p>
+</div>
+<div class="section" id="next">
+<h2>Next<a class="headerlink" href="#next" title="Permalink to this headline">¶</a></h2>
+<p>Now that the necessary libraries and programs have been installed they need to be configured. We will do this in <a class="reference internal" href="configuration.html"><span class="doc">Configuration of the driver</span></a>.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>There is a certain amount of backward compatibility in KAREL, so it may be possible to use the provided binaries, even though the runtime version specified does not match that of the controller. The TP programs do not use any non-standard options, so they should be compatible with most controllers.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>As an alternative to Roboguide, WinOLPC / OlpcPRO or even the KCL console could be used to compile the KAREL sources into p-code binaries. These alternatives are not documented in this tutorial, and only the use of Roboguide is described.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>For Fanuc&#8217;s Handling Tool, this would be Chapter 8 of the <em>FANUC Robot Series, R-30iA, Handling Tool, Operator&#8217;s Manual</em>, document <em>B-82594EN-2/02</em>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>If you&#8217;re setting up a virtual controller, FTP to <code class="docutils literal"><span class="pre">localhost</span></code> can be used, or you can copy the binaries to the <code class="docutils literal"><span class="pre">Robot_N\MC</span></code> directory (where <code class="docutils literal"><span class="pre">N</span></code> is the number of the robot controller). This directory is a sub directory of the workcell directory under <code class="docutils literal"><span class="pre">My</span> <span class="pre">Workcells</span></code>. For a workcell named <em>ROS-I Test</em>, this directory would by default be at <code class="docutils literal"><span class="pre">%USERPROFILE%\(My)</span> <span class="pre">Documents\My</span> <span class="pre">Workcells\ROS-I</span> <span class="pre">Test\Robot_N\MC</span></code>.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuration of the driver" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="introduction.html" class="btn btn-neutral" title="Introduction" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014-2016, TU Delft Robotics Institute.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.4.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
