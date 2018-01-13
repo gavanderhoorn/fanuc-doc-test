@@ -1,0 +1,16 @@
+==========  =======  =======  ====  ===========
+Name        Type     Default  Unit  Description
+==========  =======  =======  ====  ===========
+checked     boolean  False    -     Configuration has been completed by user
+f_msm_rdy   integer  1        -     movesm i'face: 'ready/ack' signal flag
+f_msm_drdy  integer  2        -     movesm i'face: 'data ready' signal flag
+loop_hz     integer  40       Hz    Main loop update rate
+move_cnt    integer  50       %     CNT to set with each joint motion instruction
+move_speed  integer  20       %     Joint speed to set for all trajectory points
+pr_move     integer  1        -     movesm i'face: position register for next trajectory point
+r_move_spd  integer  1        -     movesm i'face: integer register for motion speed
+r_move_cnt  integer  2        -     movesm i'face: integer register for CNT value
+s_tcp_nr    integer  11000    -     TCP port to listen on
+s_tag_nr    integer  4        -     Index of the Server Tag to use
+um_clear    boolean  True     -     Clear user menu on start
+==========  =======  =======  ====  ===========

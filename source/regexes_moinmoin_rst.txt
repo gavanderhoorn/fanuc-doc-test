@@ -1,0 +1,22 @@
+
+https://www.debuggex.com/
+
+
+=== Piet ===
+
+Some `text` with ''moinmoin'' markup. a [[http://some/url/to/a/page.html|link to a page]]. Here is a '''really''' bold bit. 
+
+
+headings
+={3}\s?(\w+)\s?={3}
+
+monospace text
+`(\w+)`
+
+italic, bold
+\s+'{2}(\w+)'{2}\s+
+
+link (WIP: | is a valid character in URLs, so this doesn't yet work correctly)
+\[\[(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})\|([\w\s]+)\]\]
+
+
